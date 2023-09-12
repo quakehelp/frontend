@@ -1,5 +1,5 @@
 
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import useMapStore from '../states/map.state';
 
 
