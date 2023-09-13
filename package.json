@@ -10,7 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
     "@formkit/auto-animate": "^0.8.0",
+    "@mantine/core": "^6.0.20",
+    "@mantine/form": "^6.0.20",
+    "@mantine/hooks": "^6.0.20",
+    "@mantine/modals": "^6.0.20",
+    "@mantine/notifications": "^6.0.20",
     "@react-google-maps/api": "^2.19.2",
     "axios": "^1.5.0",
     "classnames": "^2.3.2",

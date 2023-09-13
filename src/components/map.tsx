@@ -1,5 +1,5 @@
 
-import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap,  LoadScript, Marker } from '@react-google-maps/api';
 import useMapStore from '../states/map.state';
 
 
@@ -16,7 +16,7 @@ type Props = {
 
 }
 function Map({ className, center, zoom = 8 }: Props) {
-    const { onLoad, onError, onUnmount, locations, activeLocation, setActiveLocation } = useMapStore()
+    const { onLoad, onError, onUnmount, locations,loading } = useMapStore()
     return (
         <LoadScript
             googleMapsApiKey={import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY as string}
@@ -26,6 +26,7 @@ function Map({ className, center, zoom = 8 }: Props) {
 
         >
             <GoogleMap
+            id='map'
                 mapContainerClassName={className}
                 center={center}
                 zoom={zoom}
@@ -34,32 +35,50 @@ function Map({ className, center, zoom = 8 }: Props) {
 
                 }}
             >
-                {locations?.map(location => (
+                {loading||locations?.map((location, i) => (
+
                     <Marker
-                        key={location._id}
+                        key={i}
                         position={location.position}
-                        title={location.name}
-                        onClick={() => setActiveLocation(location)}
-                    // onMouseOver={() => setActiveLocation(location)}
-                    // onMouseOut={() => setActiveLocation(null)}
-                    />
-                ))}
-                {activeLocation && (
-                    <InfoWindow
-                        position={activeLocation.position}
-                       // onCloseClick={() => setActiveLocation(null)}
-                        
+                        label={location.locationName}
+                        icon={{
+
+                            url: `/marker/${location.pinStatus}.svg`,
+
+                            anchor: new google.maps.Point(17, 46),
+
+                            scaledSize: new google.maps.Size(50, 50)
+
+                        }}
+                    //onClick={() => this.handleToggleOpen()}
                     >
-                        <div>
-                            <h4>{activeLocation.locationName}</h4>
-                            <p>Population: {activeLocation.population}</p>
-                            <p>Medical Help Needed: {activeLocation.medicalHelp}</p>
-                            <p>Basic Help Needed: {activeLocation.basicHelp}</p>
-                            <p>Deceased: {activeLocation.deceased}</p>
-                            <p>Needs: {activeLocation.needs.join(", ")}</p>
-                        </div>
-                    </InfoWindow>
-                )}
+                        {/* 
+                        <InfoWindow anchor={location.position}>
+                            <span>Something</span>
+                        </InfoWindow> */}
+
+                    </Marker>
+                    // <Marker
+                    //     key={location._id}
+                    //     position={location.position}
+                    //     title={location.name}
+                    //     onClick={() => setActiveLocation(location)}
+                    // // onMouseOver={() => setActiveLocation(location)}
+                    // // onMouseOut={() => setActiveLocation(null)}
+                    // >
+                    //         <InfoWindow
+
+                    //    // onCloseClick={() => setActiveLocation(null)}
+
+                    // >
+                    //     <div className='-translate-y-10'>
+                    //         <h4>{location.locationName}</h4>
+                    //     </div>
+                    // </InfoWindow>
+                    // </Marker>
+
+                ))}
+
             </GoogleMap>
         </LoadScript>
     );

@@ -1,20 +1,22 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-class User {
-  username: string;
-  password: string;
+import api from "../utils/api";
+export type User = string
 
-  constructor(username: string, password: string) {
-    this.username = username;
-    this.password = password;
-  }
+export type Register ={
+  name: string
+  phoneNumber: string
+  password: string
+}
+export type Login ={
+  phoneNumber: string
+  password: string
 }
 
 type UserState = {
   user: User | null;
-  error: string | null;
-  loading: boolean;
-  login: (username: string, password: string) => void;
+  login: (username: string, password: string) => Promise<void>;
+  register:(register:Register)=>Promise<void>
 };
 
 const useUser = create<UserState>()(
@@ -22,33 +24,23 @@ const useUser = create<UserState>()(
     persist(
       (set) => {
         return {
-          user:{
-            username: "admin",
-            password: "admin",
+          user: null,
+      
+          register: (register:Register) => {
+            return api.post("/signup",register)
           },
-          error: null,
-          loading: false,
-          login: (username: string, password: string) => {
-            set({ loading: true });
-            setTimeout(() => {
-              if (username === "admin" && password === "admin") {
-                set({
-                  user: new User(username, password),
-                  error: null,
-                  loading: false,
-                });
-              } else {
-                set({
-                  error: "Username or password is incorrect",
-                  loading: false,
-                });
-              }
-            }, 1000);
+          login: (phoneNumber: string, password: string) => {
+             return api.post("/signin", { phoneNumber, password }).then((res) => {
+              const data = res.data;
+              set({ user: data });
+            }
+            );
+          
           },
         };
       },
       {
-        name: "user-storage",
+        name: "user-storage-v1",
       }
     )
   )

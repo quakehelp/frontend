@@ -2,42 +2,56 @@
 import { create } from "zustand";
 import api from "../utils/api";
 
-export type Status='green'|'yellow'|'red'
-export type RoadStatus= 'available'|'dangerous'|'unavailable'
-export interface TLocation extends Omit<Location, 'constructor'> {}
-export type Location=any
+export type Status = 'green' | 'yellow' | 'red'
+export type RoadStatus = 'available' | 'dangerous' | 'unavailable'
+export interface TLocation extends Omit<Location, 'constructor'> { }
+export type Location =  {
+    status: Status
+    DouarName: string
+    position: {
+        lat: number
+        lng: number
+    },
+    population: number,
+    assoName: number,
+    roadStatus: RoadStatus,
+    createdAt: Date,
+    needs: string[],
+    pinStatus: Status,
+    phoneNumber: string,
+} & any
 
 
 type MapState = {
     loading: boolean;
     error?: string;
-    activeLocation:Location|undefined;
-    locations: Location[] |undefined;
+    activeLocation: Location | undefined;
+    locations: Location[] | undefined;
     onLoad: () => void;
     onError: () => void;
     onUnmount: () => void;
-    getData:()=>Promise<void>
-    setActiveLocation:(location:Location)=>void
+    getData: () => Promise<void>
+    setActiveLocation: (location: Location) => void
 
 }
 
 const useMapStore = create<MapState>((set) => ({
     loading: true,
-    locations:undefined,
-    activeLocation:undefined,
+    locations: undefined,
+    activeLocation: undefined,
     onLoad: () => set({ loading: false }),
     onError: () => set({ loading: false, error: "Error on loading map" }),
     onUnmount: () => set({ loading: false, error: undefined }),
-    setActiveLocation:(location)=>{
-        set({activeLocation:location})
+    setActiveLocation: (location) => {
+        set({ activeLocation: location })
     },
-    getData:()=>{
-        set({loading:true})
-       return api.get("/locations").then((res)=>{
-            const data=res.data
-            
-            set({locations:data})
-        }).finally(()=>set({loading:false}))
+    getData: () => {
+        set({ loading: true })
+        return api.get("/locations").then((res) => {
+            const data = res.data
+  console.log('data', data)
+            set({ locations: data })
+        }).finally(() => set({ loading: false }))
     }
 
 }))

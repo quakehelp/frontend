@@ -1,13 +1,25 @@
 /** @type {import('tailwindcss').Config} */
 import daisy from "daisyui"
 import theme from 'daisyui/src/theming/themes'
+import colors from 'tailwindcss/colors'
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  corePlugins: {
+    preflight: false,
+  },
+  important: true,
   theme: {
-    extend: {},
+    extend: {
+      
+    },
+    colors:{
+      ...colors,
+      primary: "#D33838",
+      secondary:"#000000",
+    }
   },
   plugins: [daisy],
   daisyui: {
