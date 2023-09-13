@@ -1,19 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import LoadingMap from "../components/LoadingMap";
-import AddVillage from "../components/addVillage";
 import Map from "../components/map";
 import NavBar from "../components/navBar";
 import useMapStore from "../states/map.state";
+import { Outlet } from "react-router";
+import BottomLocationDetail from "../partials/bottomLocationDetail";
 
 function Home() {
-    const {locations,getData}=useMapStore()
+    const { locations, getData } = useMapStore()
 
-    useEffect(()=>{
-        if(!locations){
+    useEffect(() => {
+        if (!locations) {
             getData()
         }
-    },[locations])
+    }, [locations])
     const center = {
         lat: 31.0350759,
         lng: -8.4124458
@@ -24,12 +25,14 @@ function Home() {
 
         <NavBar />
 
-        <Map  center={center} zoom={10} className="w-screen h-screen translate-y-10" />
+        <Map center={center} zoom={10} className="w-screen h-screen translate-y-10" />
         <LoadingMap />
-        <div className="absolute bottom-0 left-[50%] w-full p-4 max-w-[500px] mx-auto -translate-x-[50%]">
-            <AddVillage />
-        </div>
+       
+      <Outlet/>
+      <BottomLocationDetail/>
     </div>
 }
 
 export default Home;
+
+

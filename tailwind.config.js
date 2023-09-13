@@ -19,6 +19,7 @@ export default {
       ...colors,
       primary: "#D33838",
       secondary:"#000000",
+      
     }
   },
   plugins: [daisy],

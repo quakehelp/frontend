@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import api from "../utils/api";
-export type User = string
+export type User = any
 
 export type Register ={
   name: string

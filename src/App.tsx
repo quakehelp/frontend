@@ -2,13 +2,28 @@ import { MantineProvider } from '@mantine/core';
 
 import { Notifications } from '@mantine/notifications';
 import { ModalsProvider } from '@mantine/modals';
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import Home from "./pages/home";
+import useUser from './states/user.state';
+import BottomNav from './partials/bottomNav';
+import BottomNavAdmin from './partials/bottomNavAdmin';
 function App() {
-  const routes = createBrowserRouter([
+  const user = useUser((state) => state.user)
+  const routes = (admin: boolean) => createBrowserRouter([
     {
       path: "/",
-      element: <Home />
+      element: <Home />,
+      children: [
+        {
+          index: true,
+          element: admin ? <Navigate to="admin" /> : <BottomNav />,
+        },
+        {
+          path: "admin",
+          element: admin ? <BottomNavAdmin /> : <Navigate to="/" />,
+        },
+
+      ]
     }
   ])
 
@@ -22,7 +37,7 @@ function App() {
 
       <Notifications position='bottom-right' autoClose={3000} color='secondary' />
 
-      <RouterProvider router={routes} />
+      <RouterProvider router={routes(user != undefined)} />
 
     </ModalsProvider>
   </MantineProvider>
