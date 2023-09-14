@@ -52,12 +52,6 @@ const AddVillageForm = ({
                 if (!value) return t("AddVillage.requis")
             },
 
-            assoName: (value) => {
-                if (!value) return t("AddVillage.requis")
-            },
-            phoneNumber: (value) => {
-                if (!value) return t("AddVillage.requis")
-            },
 
 
             position: (value) => {
