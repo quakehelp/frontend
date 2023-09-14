@@ -8,6 +8,7 @@ import Auth from "../partials/auth";
 import { notifications } from "@mantine/notifications";
 import useMapStore from "../states/map.state";
 import { useEffect, useState } from "react";
+import LanguageSwitcher from "./languageSwitcher";
 function NavBar() {
   const user = useUser((state) => state.user);
   const search=useMapStore(state=>state.search)
@@ -83,6 +84,8 @@ function NavBar() {
       >
         <BsPersonCircle />
       </span>
+      <Space w="xs" />
+      <LanguageSwitcher/>
     </div>
   );
 }

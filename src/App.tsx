@@ -7,6 +7,7 @@ import Home from "./pages/home";
 import useUser from './states/user.state';
 import BottomNav from './partials/bottomNav';
 import BottomNavAdmin from './partials/bottomNavAdmin';
+import { useTranslation } from 'react-i18next';
 function App() {
   const user = useUser((state) => state.user)
   const routes = (admin: boolean) => createBrowserRouter([
@@ -26,8 +27,8 @@ function App() {
       ]
     }
   ])
-
-  return <MantineProvider withGlobalStyles withNormalizeCSS>
+const {i18n}=useTranslation()
+  return <MantineProvider  withGlobalStyles withNormalizeCSS   theme={{ dir:i18n.language==="ar"?"rtl":"ltr" }}>
     <ModalsProvider modalProps={{
       centered: true,
       overlayProps: {

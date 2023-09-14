@@ -94,7 +94,7 @@ const AddVillageForm = ({
                     color: 'red',
                 })
             })
-        })} className="space-y-2">
+        })} className="space-y-1">
             <TextInput label="Nom"
                 placeholder="Nom du village ou de l'endroit"
                 {...form.getInputProps('DouarName')} />
@@ -105,7 +105,7 @@ const AddVillageForm = ({
                 <TextInput label="Téléphone"
                     placeholder="Numéro de téléphone de l'association"
                     {...form.getInputProps('phoneNumber')} />
-                <NumberInput label="Nombre de population"
+                <NumberInput label="Population"
                     min={1} max={1000000} step={1}
                     {...form.getInputProps('population')} />
             </div>

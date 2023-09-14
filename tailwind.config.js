@@ -2,6 +2,7 @@
 import daisy from "daisyui"
 import theme from 'daisyui/src/theming/themes'
 import colors from 'tailwindcss/colors'
+import rtl from 'tailwindcss-rtl'
 export default {
   content: [
     "./index.html",
@@ -22,7 +23,7 @@ export default {
       
     }
   },
-  plugins: [daisy],
+  plugins: [daisy,rtl],
   daisyui: {
     themes: [
       {
