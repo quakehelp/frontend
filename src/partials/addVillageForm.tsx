@@ -8,6 +8,7 @@ import { useState } from "react"
 import { colors } from "../utils/theme"
 import { modals } from "@mantine/modals"
 import { notifications } from "@mantine/notifications"
+import { useTranslation } from "react-i18next"
 
 type Props = {
     position: {
@@ -20,11 +21,7 @@ type Props = {
 }
 
 
-const text = {
-    green: "Le village a reçu de l'aide mais reste confronté à des pénuries",
-    yellow: "Besoins majeurs satisfaits, mais pouvant avoir des besoins sous-jacents ou à plus long terme",
-    red: "Village ayant cruellement besoin d’une aide immédiate"
-}
+
 const AddVillageForm = ({
     position,
     enteredBy,
@@ -32,6 +29,8 @@ const AddVillageForm = ({
     initialData
     
 }: Props) => {
+    const {t}=useTranslation();
+
     const {addLocation,update} = useMapStore(state => state)
     const form = useForm<TLocation>({
         initialValues: {
@@ -50,19 +49,19 @@ const AddVillageForm = ({
         validate: {
 
             DouarName: (value) => {
-                if (!value) return 'Ce champ est requis'
+                if (!value) return t("AddVillage.requis")
             },
 
             assoName: (value) => {
-                if (!value) return 'Ce champ est requis'
+                if (!value) return t("AddVillage.requis")
             },
             phoneNumber: (value) => {
-                if (!value) return 'Ce champ est requis'
+                if (!value) return t("AddVillage.requis")
             },
 
 
             position: (value) => {
-                if (!value) return 'Ce champ est requis'
+                if (!value) return t("AddVillage.requis")
             },
     }
 
@@ -89,28 +88,28 @@ const AddVillageForm = ({
             }).catch((e) => {
                 console.log('e', e)
                 notifications.show({
-                    title: 'Erreur',
-                    message: 'Une erreur est survenue',
+                    title: t("AddVillage.Err"),
+                    message: t("AddVillage.messageErr"),
                     color: 'red',
                 })
             })
         })} className="space-y-1">
-            <TextInput label="Nom"
-                placeholder="Nom du village ou de l'endroit"
+            <TextInput label={t("AddVillage.Nom")}
+                placeholder={t("AddVillage.NomPlaceholder")}
                 {...form.getInputProps('DouarName')} />
-            <TextInput label="Association"
-                placeholder="Nom de l'association qui a fourni les informations"
+            <TextInput label={t("AddVillage.Association")}
+                placeholder={t("AddVillage.AssociationPlaceholder")}
                 {...form.getInputProps('assoName')} />
             <div className="grid grid-cols-2 gap-4">
-                <TextInput label="Téléphone"
-                    placeholder="Numéro de téléphone de l'association"
+                <TextInput label={t("AddVillage.Téléphone")}
+                    placeholder={t("AddVillage.TéléphonePlaceholder")}
                     {...form.getInputProps('phoneNumber')} />
-                <NumberInput label="Population"
+                <NumberInput label={t("AddVillage.Population")}
                     min={1} max={1000000} step={1}
                     {...form.getInputProps('population')} />
             </div>
             <Select
-                label="Situation actuelle"
+                label={t("AddVillage.Situation actuelle")}
                 itemComponent={(x) => {
                     const { label, value: s } = x
                     return <div
@@ -139,41 +138,41 @@ const AddVillageForm = ({
                 data={[
                     {
                         value: 'green',
-                        label: text.green
+                        label: t("card.colorStatus.green")
                     },
                     {
                         value: 'yellow',
-                        label: text.yellow
+                        label:t("card.colorStatus.yellow")
                     },
                     {
                         value: 'red',
-                        label: text.red
+                        label: t("card.colorStatus.red")
                     }
                 ]}
                 {...form.getInputProps('pinStatus')}
 
 
             />
-            <Textarea minRows={3} label="Besoins"
-                placeholder="Nourriture, vêtements, médicaments, etc."
+            <Textarea minRows={3} label={t("AddVillage.Besoins")}
+                placeholder={t("AddVillage.BesoinsPlaceholder")}
                 {...form.getInputProps('needs')} />
 
             <Select
-                label="Situation routière"
+                label= {t("AddVillage.Situation routière")}
 
                 className="line-clamp-1"
                 data={[
                     {
                         value: 'available',
-                        label: "Route praticable"
+                        label: t("AddVillage.Route.Route praticable")
                     },
                     {
                         value: 'unavailable',
-                        label: "Route impraticable"
+                        label: t("AddVillage.Route.Route impraticable")
                     },
                     {
                         value: 'dangerous',
-                        label: "Route dangereuse"
+                        label: t("AddVillage.Route.Route dangereuse")
                     }
                 ]}
                 {...form.getInputProps('roadStatus')}
@@ -183,12 +182,12 @@ const AddVillageForm = ({
                 <button onClick={() => {
                     modals.closeAll()
                 }} className="btn btn-sm btn-ghost">
-                    Annuler
+                     {t("common.button.cancel")}
                 </button>
                 <button type="submit" className={clsx("btn btn-sm btn-primary text-white", {
                     "loading": isLoading,
                 })}>
-                    Ajouter
+                    {t("common.button.ajouter")}
                 </button>
             </div>
         </form>

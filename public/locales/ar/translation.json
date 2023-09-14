@@ -1,0 +1,88 @@
+{
+  "common": {
+      "button": {
+          "login": "تسجيل",
+          "logout": "تسجيل الخروج",
+          "logoutConfirm": "هل ترغب حقًا في تسجيل الخروج؟",
+          "register": "التسجيل",
+          "ajouter village": "إضافة قرية",
+          "ajouter": "إضافة",
+          "Confirm": "تأكيد",
+          "ConfirmTxt": "هل ترغب في إضافة قرية إلى هذا الموقع؟",
+          "modifier village": "تعديل القرية",
+          "ajouter besoin": "إضافة حاجة",
+          "la situation actuelle": "الوضع الحالي",
+          "appeler l'association": "اتصال بالجمعية",
+          "search": "بحث",
+          "cancel": "إلغاء",
+          "titleSucclogout": "نجاح",
+          "logoutSucc": "تم تسجيل الخروج بنجاح",
+          "titleErrlogout": "خطأ",
+          "logoutErr": "حدث خطأ"
+      }
+  },
+  "Se connecter": {
+      "signup": "التسجيل",
+      "loginconfirm": "هل لديك حساب بالفعل؟",
+      "signupconfirm": "ليس لديك حساب؟",
+      "connect": "تسجيل الدخول",
+      "validation": {
+          "NumRequis": "الرقم مطلوب",
+          "NumValue": "يجب أن يكون الرقم عبارة عن رقم",
+          "PassRequis": "كلمة المرور مطلوبة",
+          "PassValue": "يجب أن تحتوي كلمة المرور على ما لا يقل عن 6 أحرف",
+          "NomRequis": "الاسم مطلوب",
+          "NomValue": "يجب أن يحتوي الاسم على ما لا يقل عن 3 أحرف",
+          "msgConnect": "تم التسجيل بنجاح، يمكنك الآن تسجيل الدخول",
+          "errConnect": "تحقق من معلوماتك",
+          "titleSuccConnect": "نجاح",
+          "titleErrConnect": "خطأ"
+      }
+  },
+  "card": {
+      "population": "السكان",
+      "assoName": "الجمعية",
+      "roadStatus": {
+          "available": "الطريق متاح",
+          "dangerous": "الطريق خطر",
+          "unavailable": "الطريق غير متاح"
+      },
+      "needs": "الاحتياجات",
+      "updateTime": "تحديث الوقت",
+      "colorStatus": {
+          "green": "تلقت القرية مساعدة ولكنها تواجه نقصًا",
+          "yellow": "تم تلبية الاحتياجات الرئيسية ولكن قد تكون هناك احتياجات أخرى أو طويلة الأمد",
+          "red": "القرية تحتاج بشدة إلى مساعدة فورية"
+      }
+  },
+  "user": {
+      "name": "الاسم",
+      "phoneNumber": "رقم الهاتف",
+      "password": "كلمة المرور"
+  },
+  "AddVillage": {
+      "requis": "هذا الحقل مطلوب",
+      "Err": "خطأ",
+      "messageErr": "حدث خطأ",
+      "Nom": "الاسم",
+      "NomPlaceholder": "اسم القرية أو المكان",
+      "Association": "الجمعية",
+      "AssociationPlaceholder": "اسم الجمعية التي قدمت المعلومات",
+      "Téléphone": "رقم الهاتف",
+      "TéléphonePlaceholder": "رقم هاتف الجمعية",
+      "Population": "السكان",
+      "Situation actuelle": "الوضع الحالي",
+      "Besoins": "الاحتياجات",
+      "BesoinsPlaceholder": "طعام، ملابس، أدوية، إلخ.",
+      "Route": {
+          "Route praticable": "الطريق قابل للسفر",
+          "Route impraticable": "الطريق غير قابل للسفر",
+          "Route dangereuse": "الطريق خطر"
+      },
+      "Situation routière": "حالة الطريق",
+
+      "Informations": "معلومات",
+"InfoDetails": ".انقر على الخريطة لإضافة قرية أو تعديل قرية موجودة عن طريق النقر عليها"
+
+  }
+}

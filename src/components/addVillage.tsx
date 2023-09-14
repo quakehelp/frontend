@@ -1,23 +1,27 @@
 import { modals } from "@mantine/modals"
+import { useTranslation } from "react-i18next";
 import { IoAddOutline } from "react-icons/io5"
 const AddVillage = () => {
+  const {t}=useTranslation();
   return <div>
     <button onClick={()=>{
       modals.openConfirmModal({
-        title:"Informations",
+        title:t("AddVillage.Informations"),
         labels:{
-          confirm:"Ok",
-          cancel:"Annuler"
+          confirm:t("common.button.search"),
+          cancel:t("common.button.cancel")
         },
         cancelProps:{
           className:"hidden"
         },
         
-        children:"Cliquer sur la carte pour ajouter un village ou modifier un village existant en cliquant dessus",
+        children:t("AddVillage.InfoDetails"),
+     
+     
       })
     }} className='btn btn-primary rounded-full w-full text-white gap-4'>
     <IoAddOutline className="text-xl"/>
-    Add Village
+    {t("common.button.ajouter village")}
   </button>
   </div>
 }
