@@ -2,9 +2,12 @@
 
 import { GoogleMap, LoadScript, Marker, OverlayView } from '@react-google-maps/api';
 import useMapStore from '../states/map.state';
-import {  clsx } from '@mantine/core';
+import { clsx } from '@mantine/core';
 import { colors } from '../utils/theme';
 import { useLocation, useNavigate } from 'react-router';
+import useUser from '../states/user.state';
+import { modals } from '@mantine/modals';
+import AddVillageForm from '../partials/addVillageForm';
 
 
 
@@ -21,7 +24,8 @@ type Props = {
 }
 
 function Map({ className, zoom = 8 }: Props) {
-    const { onLoad, onError, onUnmount, filter:locations, loading,center } = useMapStore()
+    const { onLoad, onError, onUnmount, filter: locations, loading, center } = useMapStore()
+    const user = useUser(state => state.user)
     const navigate = useNavigate()
     const search = useLocation()
     return (
@@ -30,6 +34,8 @@ function Map({ className, zoom = 8 }: Props) {
             onLoad={onLoad}
             onError={onError}
             onUnmount={onUnmount}
+            region='MA'
+            language='fr'
 
         >
             <GoogleMap
@@ -39,17 +45,39 @@ function Map({ className, zoom = 8 }: Props) {
                 center={center}
                 zoom={zoom}
                 onClick={(e) => {
-                    console.log(e)
+
+                    if (user && e) {
+                        modals.openConfirmModal({
+                            id: 'ask-add-village',
+                            title: 'Confirmation',
+                            children: 'Voulez-vous ajouter un village à cette position ?',
+                            labels: {
+                                confirm: 'Ajouter',
+                                cancel: 'Annuler'
+
+                            },
+                            onConfirm: () => {
+                                modals.close('ask-add-village')
+                                modals.open({
+                                    id: 'add-village',
+                                    title: 'Ajouter un village',
+                                    children: <AddVillageForm position={{
+                                        lat: e.latLng?.lat() || 0,
+                                        lng: e.latLng?.lng() || 0
+
+                                    }} enteredBy={user._id} phoneNumber={user.numberPhone} />
 
 
+                                })
+                            }
 
+                        })
+                    } else {
 
-
-
-
-                    if (search.search) {
-                        //remove seach
-                        navigate('')
+                        if (search.search) {
+                            //remove seach
+                            navigate('')
+                        }
                     }
                 }}
                 options={{
@@ -57,6 +85,7 @@ function Map({ className, zoom = 8 }: Props) {
                     disableDefaultUI: true,
 
                 }}
+
             >
                 {loading || locations?.map((location, i) => {
 
@@ -69,6 +98,15 @@ function Map({ className, zoom = 8 }: Props) {
                         >
 
                             <div onClick={() => {
+                                if(user){
+                                    modals.open({
+                                        id: 'add-village',
+                                        title: 'Modifier le village',
+                                        children: <AddVillageForm position={location.position} initialData={location} enteredBy={user._id} phoneNumber={user.numberPhone} />
+    
+    
+                                    })
+                                }else
                                 navigate(`?location=${location._id}`)
                             }} style={{
                                 border: `2px solid ${(colors as any)[location.pinStatus]}`
@@ -90,7 +128,7 @@ function Map({ className, zoom = 8 }: Props) {
                         <Marker
                             key={i}
                             position={location.position}
-                            label={location.locationName}
+                            label={location.DouarName}
                             icon={{
 
                                 url: `/marker/${location.pinStatus}.svg`,

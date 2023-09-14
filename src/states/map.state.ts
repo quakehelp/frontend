@@ -1,25 +1,39 @@
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
 import api from "../utils/api";
 
 export type Status = 'green' | 'yellow' | 'red'
 export type RoadStatus = 'available' | 'dangerous' | 'unavailable'
-export interface TLocation extends Omit<Location, 'constructor'> { }
-export type Location = {
-    status: Status
+export type TLocation = {
+   
     DouarName: string
     position: {
         lat: number
         lng: number
     },
+    enteredBy: string,
     population: number,
-    assoName: number,
+    assoName: string,
     roadStatus: RoadStatus,
     createdAt: Date,
     needs: string,
     pinStatus: Status,
     phoneNumber: string,
-} & any
+}
+export type Location ={_id:string,     DouarName: string
+    position: {
+        lat: number
+        lng: number
+    },
+    enteredBy: string,
+    population: number,
+    assoName: string,
+    roadStatus: RoadStatus,
+    createdAt: Date,
+    needs: string,
+    pinStatus: Status,
+    phoneNumber: string,}
 
 
 type MapState = {
@@ -32,7 +46,9 @@ type MapState = {
     onError: () => void;
     onUnmount: () => void;
     getData: () => Promise<void>
+    update: (location: Location) => Promise<void>
     setActiveLocation: (location: Location) => void,
+    addLocation: (location: TLocation) => Promise<void>,
     setFilter: (filter: Location[] | undefined) => void,
     center: {
         lat: number
@@ -47,7 +63,7 @@ type MapState = {
 
 }
 
-const useMapStore = create<MapState>((set) => ({
+const useMapStore = create<MapState>((set, get) => ({
     loading: true,
     locations: undefined,
     center: {
@@ -56,6 +72,25 @@ const useMapStore = create<MapState>((set) => ({
     },
     activeLocation: undefined,
     filter: undefined,
+    update: (location) => {
+        return api.put(`/locations/${location._id}`, location).then((res) => {
+            const data = res.data
+            const locations = get().locations
+            const index = locations?.findIndex((l) => l._id === data._id)
+            if (index !== undefined && index !== -1) {
+                locations?.splice(index, 1, data)
+                set({ locations: [...(locations || [])], filter: [...(locations || [])] })
+            }
+        }
+        )
+    },
+    addLocation: (location) => {
+        const locations = get().locations
+        return api.post("/locations", location).then((res) => {
+            const data = res.data
+            set({ locations: [...(locations || []), data], filter: [...(locations || []), data] })
+        })
+    },
     setCenter: (c) => {
         set({ center: c })
     },

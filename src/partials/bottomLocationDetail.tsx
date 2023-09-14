@@ -7,17 +7,17 @@ import { Space } from "@mantine/core"
 import { BiSolidPhoneCall } from "react-icons/bi"
 import useDate from "../utils/useDate"
 const BottomLocationDetail = () => {
-    const [location, setLocation] = useState<Location | null>(null)
+    const [location, setLocation] = useState<Location | undefined>(undefined)
     const locations = useMapStore(state => state.locations)
-    const {dayjs}=useDate()
+    const { dayjs } = useDate()
     const search = useLocation().search
     useEffect(() => {
         if (search) {
             const params = new URLSearchParams(search)
             const id = params.get('location')
             setLocation(locations?.find(location => location._id == id))
-        }else{
-            setLocation(null)
+        } else {
+            setLocation(undefined)
         }
     }, [search, locations])
     if (!location) return null
@@ -38,13 +38,13 @@ const BottomLocationDetail = () => {
             <div style={{
                 border: `1px solid ${(colors as any)[location.pinStatus]}`
             }} className="rounded-[14px] p-3">
-             <h5 className="my-0 text-2xl">
+                <h5 className="my-0 text-2xl">
                     {location.DouarName}
-             </h5>
-             <span>
+                </h5>
+                <span>
                     {location.assoName}
-             </span>
-                </div>
+                </span>
+            </div>
             <div style={{
                 border: `1px solid ${(colors as any)[location.pinStatus]}`
             }} className="rounded-[14px] p-3">
@@ -58,13 +58,15 @@ const BottomLocationDetail = () => {
                 <p className="my-0">
                     {location.needs}
                 </p>
-               <div className="flex flex-row w-full justify-end text-xs text-gray-500">
-              {dayjs(location.createdAt).locale('fr').fromNow()}
-               </div>
+                <div className="flex flex-row w-full justify-end text-xs text-gray-500">
+                    {dayjs(location.createdAt).locale('fr').fromNow()}
+                </div>
             </div>
             <Space h="md" />
-            <button className="btn btn-primary rounded-full w-full text-white">
-                <BiSolidPhoneCall/>
+            <button disabled={!location.phoneNumber} onClick={()=>{
+                window.open(`tel:${location.phoneNumber}`)
+            }} className="btn btn-primary rounded-full w-full text-white">
+                <BiSolidPhoneCall />
                 Appeler l'association
             </button>
         </div>
