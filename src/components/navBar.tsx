@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FiSearch } from "react-icons/fi";
 import { BsPersonCircle } from "react-icons/bs";
 import { Space } from "@mantine/core";
@@ -5,8 +6,16 @@ import useUser from "../states/user.state";
 import { modals } from "@mantine/modals";
 import Auth from "../partials/auth";
 import { notifications } from "@mantine/notifications";
+import useMapStore from "../states/map.state";
+import { useEffect, useState } from "react";
 function NavBar() {
   const user = useUser((state) => state.user);
+  const search=useMapStore(state=>state.search)
+  const [searchValue, setSearchValue] = useState<string>("")
+
+  useEffect(() => {
+    search(searchValue)
+  }, [searchValue]);
   return (
     <div className="navbar bg-primary text-primary-content absolute top-0 left-0 z-10 px-4">
       <img src="logos/logo_white.png" alt="logo" className="w-20" />
@@ -17,6 +26,10 @@ function NavBar() {
             <input
               className="input join-item input-sm w-[130px] text-black"
               placeholder="Search"
+              value={searchValue}
+              onChange={(e)=>{
+                setSearchValue(e.target.value)
+              }}
             />
           </div>
         </div>

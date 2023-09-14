@@ -97,7 +97,8 @@ function Map({ className, zoom = 8 }: Props) {
 
                         >
 
-                            <div onClick={() => {
+                            <div onClick={(e) => {
+                                e.stopPropagation()
                                 if(user){
                                     modals.open({
                                         id: 'add-village',

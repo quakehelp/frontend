@@ -50,6 +50,7 @@ type MapState = {
     setActiveLocation: (location: Location) => void,
     addLocation: (location: TLocation) => Promise<void>,
     setFilter: (filter: Location[] | undefined) => void,
+    search:(query:string)=>void
     center: {
         lat: number
         lng: number
@@ -72,6 +73,23 @@ const useMapStore = create<MapState>((set, get) => ({
     },
     activeLocation: undefined,
     filter: undefined,
+    search:(query)=>{
+        const locations=get().locations
+       
+        if(locations){
+            if(query.length===0) return set({filter:locations})
+            else{
+            const filter=locations.filter((l)=>l.DouarName.toLowerCase().includes(query.toLowerCase()))
+            const first=filter[0]
+            if(first){
+                set({center:{lat:31.7943,lng:-7.0849}})
+                console.log('center')
+                set({center:first.position})
+            }
+            set({filter})
+            }
+        }
+    },
     update: (location) => {
         return api.put(`/locations/${location._id}`, location).then((res) => {
             const data = res.data

@@ -79,13 +79,6 @@ const AddVillageForm = ({
                     modals.closeAll()
                 }).finally(() => {
                     setIsLoading(false)
-                }).catch((e) => {
-                    console.log('e', e)
-                    notifications.show({
-                        title: 'Erreur',
-                        message: 'Une erreur est survenue',
-                        color: 'red',
-                    })
                 })
             }
             else
