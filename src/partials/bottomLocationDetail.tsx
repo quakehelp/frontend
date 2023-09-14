@@ -64,7 +64,7 @@ const BottomLocationDetail = () => {
             </div>
             <Space h="md" />
             <button disabled={!location.phoneNumber} onClick={()=>{
-                window.open(`tel:${location.phoneNumber}`)
+                window.open(`tel://${location.phoneNumber}`)
             }} className="btn btn-primary rounded-full w-full text-white">
                 <BiSolidPhoneCall />
                 Appeler l'association

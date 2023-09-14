@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FiSearch } from "react-icons/fi";
 import { BsPersonCircle } from "react-icons/bs";
-import { Space } from "@mantine/core";
+import { Space, clsx } from "@mantine/core";
 import useUser from "../states/user.state";
 import { modals } from "@mantine/modals";
 import Auth from "../partials/auth";
@@ -10,7 +10,7 @@ import useMapStore from "../states/map.state";
 import { useEffect, useState } from "react";
 import LanguageSwitcher from "./languageSwitcher";
 function NavBar() {
-  const user = useUser((state) => state.user);
+  const {user,admin} = useUser((state) => state);
   const search=useMapStore(state=>state.search)
   const [searchValue, setSearchValue] = useState<string>("")
 
@@ -61,7 +61,7 @@ function NavBar() {
               },
               onConfirm: () => {
                 try {
-                  useUser.setState({ user: null });
+                  useUser.setState({ user: null,admin:false });
                   notifications.show({
                     title: "Succès",
                     message: "Vous êtes déconnecté avec succès",
@@ -80,7 +80,9 @@ function NavBar() {
             });
           }
         }}
-        className="btn btn-circle btn-sm"
+        className={clsx("btn btn-circle btn-sm",{
+          "hidden":!admin
+        })}
       >
         <BsPersonCircle />
       </span>

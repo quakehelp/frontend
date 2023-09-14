@@ -4,13 +4,16 @@ import LoadingMap from "../components/LoadingMap";
 import Map from "../components/map";
 import NavBar from "../components/navBar";
 import useMapStore from "../states/map.state";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 import BottomLocationDetail from "../partials/bottomLocationDetail";
 import { BiCurrentLocation } from "react-icons/bi";
+import { modals } from "@mantine/modals";
+import useUser from "../states/user.state";
 
 function Home() {
     const { locations, getData,setCenter } = useMapStore()
-
+    const {setAdmin,admin}=useUser(state=>state)
+    const search=useLocation().search
     useEffect(() => {
         if (!locations) {
             getData()
@@ -23,6 +26,31 @@ function Home() {
     useEffect(() => {
         getUserLocation()
     }, []);
+
+    useEffect(() => {
+        if (search && !admin) {
+            console.log('search', search)
+            const params = new URLSearchParams(search)
+            const admin = params.get('invitation')
+            console.log('admin', admin)
+            if(admin && admin==="admin"){
+                modals.openConfirmModal({
+                    title:"Confirmation",
+                    children:"Voulez-vous accepter l'invitation de l'administrateur ?",
+                    labels:{
+                        confirm:"Accepter",
+                        cancel:"Refuser"
+                    },
+                    onConfirm:()=>{
+                        setAdmin(true)
+
+                    }
+
+                });
+            }
+            
+        }
+    }, [search]);
     const getUserLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -43,7 +71,7 @@ function Home() {
 
         <NavBar />
 
-        <Map center={center} zoom={10} className="w-screen h-screen translate-y-10" />
+        <Map center={center} zoom={10} className="w-screen h-screen" />
         <div className="absolute bottom-[100px] right-3">
             <span onClick={getUserLocation} className="btn bg-white btn-circle shadow-xl">
                 <BiCurrentLocation className="text-xl"/>

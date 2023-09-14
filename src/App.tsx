@@ -27,8 +27,8 @@ function App() {
       ]
     }
   ])
-const {i18n}=useTranslation()
-  return <MantineProvider  withGlobalStyles withNormalizeCSS   theme={{ dir:i18n.language==="ar"?"rtl":"ltr" }}>
+  const { i18n } = useTranslation()
+  return <MantineProvider withGlobalStyles withNormalizeCSS theme={{ dir: i18n.language === "ar" ? "rtl" : "ltr" }}>
     <ModalsProvider modalProps={{
       centered: true,
       overlayProps: {
