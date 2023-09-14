@@ -9,5 +9,6 @@ i18n
   .init({
     debug: true,
     fallbackLng: 'ar',
+    lng:'ar',
   });
 export default i18n;

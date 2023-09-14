@@ -1,0 +1,95 @@
+{
+    "common": {
+        "button": {
+            "login": "Authentification",
+            "logout": "Déconnexion",
+            "logoutConfirm": "Voulez-vous vraiment vous déconnecter ?",
+            "register": "Inscription",
+            "ajouter village": "Ajouter Village",
+            "ajouter": "Ajouter ",
+            "Confirm": "Confirmation",
+            "ConfirmTxt": "Voulez-vous ajouter un village à cette position ?",
+            "modifier village": "Modifier Village",
+            "ajouter besoin": "Ajouter besoin",
+            "la situation actuelle": "La situation actuelle",
+            "appeler l'association": "Appeler l'association",
+            "search": "Chercher",
+            "cancel": "Annuler",
+            "titleSucclogout": "Succès",
+            "logoutSucc": "Vous êtes déconnecté avec succès",
+            "titleErrlogout": "Erreur",
+            "logoutErr": "Une erreur s'est produite"
+        }
+    },
+    "Se connecter": {
+       "signup" :"S'inscrire",
+       "loginconfirm" :"Vous avez déjà un compte ?",
+       "signupconfirm":" Vous n'avez pas de compte ?",
+       "connect":"Se connecter",
+       "validation":{
+        "NumRequis":"Le numéro est requis",
+        "NumValue":"Le numéro doit être un nombre",
+        "PassRequis":"Le mot de passe est requis",
+        "PassValue":"Le mot de passe doit contenir au moins 6 caractères",
+        "NomRequis":"Le nom est requis",
+        "NomValue":"Le nom doit contenir au moins 3 caractères",
+        "msgConnect":"Vous êtes inscrit avec succès, vous pouvez maintenant vous connecter",
+        "errConnect":"Vérifiez vos informations",
+        "titleSuccConnect": "Succès",
+        "titleErrConnect": "Erreur"
+
+
+       }
+
+
+    },
+    "card": {
+        "population": "Population",
+        "assoName": "Association",
+        "roadStatus": {
+            "available": "Route Disponible",
+            "dangerous": "Route Dangereux",
+            "unavailable": "Route Indisponible"
+        },
+        "needs": "Besoins",
+        "updateTime": "Mise à jour",
+        "colorStatus":{
+            "green": "Le village a reçu de l'aide mais reste confronté à des pénuries",
+    "yellow": "Besoins majeurs satisfaits, mais pouvant avoir des besoins sous-jacents ou à plus long terme",
+    "red": "Village ayant cruellement besoin d’une aide immédiate"
+
+        }
+    },
+    "user": {
+        "name": "Nom",
+        "phoneNumber": "Numéro tél",
+        "password": "Mot de passe"
+    },
+    "AddVillage":{
+        "requis":"Ce champ est requis",
+        "Err":"Erreur",
+        "messageErr":"Une erreur est survenue",
+        "Nom":"Nom",
+        "NomPlaceholder":"Nom du village ou de l'endroit",
+        "Association":"Association",
+        "AssociationPlaceholder":"Nom de l'association qui a fourni les informations",
+        "Téléphone":"Téléphone",
+        "TéléphonePlaceholder":"Numéro de téléphone de l'association",
+        "Population":"Population",
+        "Situation actuelle":"Situation actuelle",
+        "Besoins":"Besoins",
+        "BesoinsPlaceholder":"Nourriture, vêtements, médicaments, etc.",
+        "Route":{
+            "Route praticable":"Route praticable",
+            "Route impraticable":"Route impraticable",
+            "Route dangereuse":"Route dangereuse"
+
+        },
+        "Situation routière":"Situation routière",
+        "Informations":"Informations",
+        "InfoDetails":"Cliquer sur la carte pour ajouter un village ou modifier un village existant en cliquant dessus."
+        
+        
+
+    }
+}

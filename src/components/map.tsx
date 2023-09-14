@@ -23,6 +23,7 @@ type Props = {
 }
 
 function Map({ className, zoom = 8 }: Props) {
+    const {t}=useTranslation();
     const { onLoad, onError, onUnmount, filter: locations, loading, center } = useMapStore()
     const user = useUser(state => state.user)
     const navigate = useNavigate()
@@ -49,18 +50,18 @@ function Map({ className, zoom = 8 }: Props) {
                     if (user && e) {
                         modals.openConfirmModal({
                             id: 'ask-add-village',
-                            title: 'Confirmation',
-                            children: 'Voulez-vous ajouter un village à cette position ?',
+                            title: t("common.button.Confirm"),
+                            children: t("common.button.ConfirmTxt"),
                             labels: {
-                                confirm: 'Ajouter',
-                                cancel: 'Annuler'
+                                confirm: t("common.button.ajouter"),
+                                cancel: t("common.button.cancel")
 
                             },
                             onConfirm: () => {
                                 modals.close('ask-add-village')
                                 modals.open({
                                     id: 'add-village',
-                                    title: 'Ajouter un village',
+                                    title:  t("common.button.ajouter village"),
                                     children: <AddVillageForm position={{
                                         lat: e.latLng?.lat() || 0,
                                         lng: e.latLng?.lng() || 0
@@ -106,7 +107,7 @@ function Map({ className, zoom = 8 }: Props) {
                             if(user){
                                 modals.open({
                                     id: 'add-village',
-                                    title: 'Modifier le village',
+                                    title:  t("common.button.modifier village"),
                                     children: <AddVillageForm position={location.position} initialData={location} enteredBy={user._id} phoneNumber={user.numberPhone} />
 
 

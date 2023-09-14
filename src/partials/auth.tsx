@@ -4,22 +4,22 @@ import { useForm } from "@mantine/form"
 import useUser, { Login, Register } from "../states/user.state"
 import { modals } from "@mantine/modals"
 import { notifications } from "@mantine/notifications"
+import { useTranslation } from "react-i18next"
 const Auth = () => {
+
+
   const [isSignin, setIsSignin] = useState(false)
   return (
     <div>
       {isSignin ? <SignIn setIsSignin={setIsSignin} /> : <SignUp setIsSignin={setIsSignin} />}
-
     </div>
   )
 }
-
 export default Auth
-
-
 const SignUp = ({ setIsSignin }: {
   setIsSignin: (value: boolean) => void
 }) => {
+  const {t}=useTranslation();
   const form = useForm<Register>(
     {
       initialValues: {
@@ -31,31 +31,32 @@ const SignUp = ({ setIsSignin }: {
       validate: {
         phoneNumber: (value) => {
           if (!value) {
-            return 'Le numéro est requis'
+           return  t("Se connecter.validation.NumRequis")
+
           }
           //doit etre digit
           if (isNaN(Number(value))) {
-            return 'Le numéro doit être un nombre'
+            return  t("Se connecter.validation.NumValue")
           }
 
         },
 
         password: (value) => {
           if (!value) {
-            return 'Le mot de passe est requis'
+            return  t("Se connecter.validation.PassRequis")
           }
           if (value.length < 6) {
-            return 'Le mot de passe doit contenir au moins 6 caractères'
+            return  t("Se connecter.validation.PassValue")
           }
 
         },
 
         name: (value) => {
           if (!value) {
-            return 'Le nom est requis'
+            return  t("Se connecter.validation.NomRequis")
           }
           if (value.length < 3) {
-            return 'Le nom doit contenir au moins 3 caractères'
+            return  t("Se connecter.validation.NomValue")
           }
         }
       }
@@ -68,8 +69,8 @@ const SignUp = ({ setIsSignin }: {
     console.log('v', v)
     register(v).then(() => {
       notifications.show({
-        title: 'Succès',
-        message: "Vous êtes inscrit avec succès, vous pouvez maintenant vous connecter",
+        title:  t("Se connecter.validation.titleSuccConnect"),
+        message:t("Se connecter.validation.msgConnect"),
         color: 'green',
         autoClose: 3000,
       })
@@ -77,8 +78,8 @@ const SignUp = ({ setIsSignin }: {
     }).catch((err) => {
       console.log(err)
       notifications.show({
-        title: 'Erreur',
-        message: "Vérifiez vos informations",
+        title:  t("Se connecter.validation.titleErrConnect"),
+        message: t("Se connecter.validation.errConnect"),
         color: 'red',
         autoClose: 3000,
       })
@@ -87,16 +88,16 @@ const SignUp = ({ setIsSignin }: {
     }
     )
   })}>
-    <TextInput label="Nom" withAsterisk  {...form.getInputProps("name")} />
-    <TextInput label="Numero tel." withAsterisk  {...form.getInputProps("phoneNumber")} />
-    <PasswordInput label="Mot de passe" withAsterisk  {...form.getInputProps("password")} />
+    <TextInput label={t("user.name")} withAsterisk  {...form.getInputProps("name")} />
+    <TextInput label={t("user.phoneNumber")} withAsterisk  {...form.getInputProps("phoneNumber")} />
+    <PasswordInput label={t("user.password")} withAsterisk  {...form.getInputProps("password")} />
     <Space h="md" />
     <Button loading={isloading} fullWidth type="submit" className="bg-primary">
-      S'inscrire
+    {t("Se connecter.signup")}
     </Button>
     <Space h="xs" />
     <span>
-      Vous avez déjà un compte ? <span onClick={() => setIsSignin(true)} className="text-primary cursor-pointer">Se connecter</span>
+    {t("Se connecter.loginconfirm")} <span onClick={() => setIsSignin(true)} className="text-primary cursor-pointer"> {t("Se connecter.connect")} </span>
     </span>
   </form>
 }
@@ -106,6 +107,8 @@ const SignIn = ({ setIsSignin }: {
   setIsSignin: (value: boolean) => void
 }) => {
   const login = useUser().login
+  const {t}=useTranslation();
+
   const form = useForm<Login>(
     {
       initialValues: {
@@ -116,20 +119,20 @@ const SignIn = ({ setIsSignin }: {
       validate: {
         password: (value) => {
           if (!value) {
-            return 'Le mot de passe est requis'
+            return t("Se connecter.validation.PassRequis")
           }
           if (value.length < 6) {
-            return 'Le mot de passe doit contenir au moins 6 caractères'
+            return  t("Se connecter.validation.PassValue")
           }
 
         },
         phoneNumber: (value) => {
           if (!value) {
-            return 'Le numéro est requis'
+            return t("Se connecter.validation.NumRequis")
           }
           //doit etre digit
           if (isNaN(Number(value))) {
-            return 'Le numéro doit être un nombre'
+            return  t("Se connecter.validation.NumValue")
           }
 
         },
@@ -145,8 +148,8 @@ const SignIn = ({ setIsSignin }: {
     }).catch((err) => {
       console.log(err)
       notifications.show({
-        title: 'Erreur',
-        message: "Vérifiez vos informations",
+        title:  t("Se connecter.validation.titleErrConnect"),
+        message: t("Se connecter.validation.errConnect"),
         color: 'red',
         autoClose: 3000,
       })
@@ -155,15 +158,15 @@ const SignIn = ({ setIsSignin }: {
     }
     )
   })}>
-    <TextInput label="Numero tel." withAsterisk  {...form.getInputProps("phoneNumber")} />
-    <PasswordInput label="Mot de passe" withAsterisk  {...form.getInputProps("password")} />
+    <TextInput label={t("user.phoneNumber")} withAsterisk  {...form.getInputProps("phoneNumber")} />
+    <PasswordInput label={t("user.password")} withAsterisk  {...form.getInputProps("password")} />
     <Space h="md" />
     <Button loading={isloading} fullWidth type="submit" className="bg-primary">
-      Se connecter
+    {t("Se connecter.connect")} 
     </Button>
     <Space h="xs" />
     <span>
-      Vous n'avez pas de compte ? <span onClick={() => setIsSignin(false)} className="text-primary cursor-pointer">S'inscrire</span>
+    {t("Se connecter.signupconfirm")} <span onClick={() => setIsSignin(false)} className="text-primary cursor-pointer">{t("Se connecter.signup")}</span>
     </span>
 
   </form>

@@ -9,7 +9,9 @@ import { notifications } from "@mantine/notifications";
 import useMapStore from "../states/map.state";
 import { useEffect, useState } from "react";
 import LanguageSwitcher from "./languageSwitcher";
+import { useTranslation } from "react-i18next";
 function NavBar() {
+  const {t}=useTranslation();
   const {user,admin} = useUser((state) => state);
   const search=useMapStore(state=>state.search)
   const [searchValue, setSearchValue] = useState<string>("")
@@ -26,7 +28,8 @@ function NavBar() {
           <div>
             <input
               className="input join-item input-sm w-[130px] text-black"
-              placeholder="Search"
+              placeholder={t("common.button.search")}
+
               value={searchValue}
               onChange={(e)=>{
                 setSearchValue(e.target.value)
@@ -44,34 +47,34 @@ function NavBar() {
         onClick={() => {
           if (!user) {
             modals.open({
-              title: "Authentification",
+              title: t("common.button.login"),
               children: <Auth />,
             });
           } else {
             modals.openConfirmModal({
-              title: "Déconnexion",
-              children: "Voulez-vous vraiment vous déconnecter ?",
+              title: t("common.button.logout"),
+              children: t("common.button.logoutConfirm"),
               color: "red",
               confirmProps: {
                 color: "red",
               },
               labels: {
-                confirm: "Déconnexion",
-                cancel: "Annuler",
+                confirm:t("common.button.logout"),
+                cancel: t("common.button.cancel"),
               },
               onConfirm: () => {
                 try {
                   useUser.setState({ user: null,admin:false });
                   notifications.show({
-                    title: "Succès",
-                    message: "Vous êtes déconnecté avec succès",
+                    title: t("common.button.titleSucclogout"),
+                    message: t("common.button.logoutSucc"),
                     color: "green",
                     autoClose: 3000,
                   });
                 } catch (error) {
                   notifications.show({
-                    title: "Erreur",
-                    message: "Une erreur s'est produite",
+                    title: t("common.button.titleErrlogout"),
+                    message: t("common.button.logoutErr"),
                     color: "red",
                     autoClose: 3000,
                   });

@@ -6,7 +6,9 @@ import { colors } from "../utils/theme"
 import { Space } from "@mantine/core"
 import { BiSolidPhoneCall } from "react-icons/bi"
 import useDate from "../utils/useDate"
+import { useTranslation } from "react-i18next"
 const BottomLocationDetail = () => {
+    const {t}=useTranslation();
     const [location, setLocation] = useState<Location | undefined>(undefined)
     const locations = useMapStore(state => state.locations)
     const { dayjs } = useDate()
@@ -32,7 +34,7 @@ const BottomLocationDetail = () => {
 
                 </div>
                 <span className="font-semibold">
-                    La situation actuelle
+                {t("common.button.la situation actuelle")}
                 </span>
             </div>
             <div style={{
@@ -50,10 +52,10 @@ const BottomLocationDetail = () => {
             }} className="rounded-[14px] p-3">
                 <div className="flex flex-row items-center gap-2">
                     <img src="images/population.svg" alt="arrow" className="w-10 h-10" />
-                    Population : <span className="font-semibold">{location.population}</span>
+                    {t("card.needs")} : <span className="font-semibold">{location.population}</span>
                 </div>
                 <h6 className="font-semibold my-2 text-xl">
-                    Besoins :
+                {t("card.population")}
                 </h6>
                 <p className="my-0">
                     {location.needs}
@@ -67,7 +69,7 @@ const BottomLocationDetail = () => {
                 window.open(`tel://${location.phoneNumber}`)
             }} className="btn btn-primary rounded-full w-full text-white">
                 <BiSolidPhoneCall />
-                Appeler l'association
+                {t("common.button.appeler l'association")}
             </button>
         </div>
     </div>
