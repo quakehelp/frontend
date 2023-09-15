@@ -10,7 +10,9 @@ const BottomNav = () => {
            <img onClick={()=>{
               setFilter(locations?.filter(location=>location.pinStatus=='red') as any)
            }} src="images/red.svg" alt="logo" className="w-[70px]" />
-           <span className="btn btn-circle bg-white shadow-md">
+           <span onClick={()=>{
+            setFilter(locations)
+           }} className="btn btn-circle bg-white shadow-md">
             <IoClose className="text-xl" />
            </span>
            <img onClick={()=>{
