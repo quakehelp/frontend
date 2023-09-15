@@ -53,10 +53,10 @@ const BottomLocationDetail = () => {
             }} className="rounded-[14px] p-3">
                 <div className="flex flex-row items-center gap-2">
                     <img src="images/population.svg" alt="arrow" className="w-10 h-10" />
-                    {t("card.needs")} : <span className="font-semibold">{location.population}</span>
+                    {t("card.population")} : <span className="font-semibold">{location.population}</span>
                 </div>
                 <h6 className="font-semibold my-2 text-xl">
-                {t("card.population")}
+                {t("card.needs")}
                 </h6>
                 <p className="my-0">
                     {location.needs}
