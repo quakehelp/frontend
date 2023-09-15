@@ -22,8 +22,9 @@ const BottomLocationDetail = () => {
             setLocation(undefined)
         }
     }, [search, locations])
+    const i18n=useTranslation().i18n
     if (!location) return null
-    return <div className="absolute bottom-0 p-7 rounded-t-[30px] left-[50%] w-full bg-white max-w-[500px] mx-auto -translate-x-[50%]">
+    return <div dir={i18n.language==="ar"?"rtl":"ltr"} className="absolute bottom-0 p-7 rounded-t-[30px] left-[50%] w-full bg-white max-w-[500px] mx-auto -translate-x-[50%]">
         <div className="space-y-4">
             <div className="flex flex-row items-center gap-3">
                 <div style={{

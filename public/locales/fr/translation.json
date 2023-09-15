@@ -78,6 +78,8 @@
         "Population":"Population",
         "Situation actuelle":"Situation actuelle",
         "Besoins":"Besoins",
+        "lat":"Latitude",
+        "lng":"Longitude",
         "BesoinsPlaceholder":"Nourriture, vêtements, médicaments, etc.",
         "Route":{
             "Route praticable":"Route praticable",

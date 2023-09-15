@@ -172,6 +172,18 @@ const AddVillageForm = ({
                 {...form.getInputProps('roadStatus')}
 
             />
+            <div dir={'ltr'} className="grid grid-cols-1 gap-1">
+        <NumberInput  label={t("AddVillage.lat")}
+                    removeTrailingZeros
+                    precision={10}
+                    type="number"
+                    {...form.getInputProps('position.lat')} />
+                            <NumberInput label={t("AddVillage.lng")}
+                    removeTrailingZeros
+                    precision={10}
+                    type="number"
+                    {...form.getInputProps('position.lng')} />
+            </div>
             <div className="mt-4 flex flex-row gap-3 justify-end">
                 <button onClick={() => {
                     modals.closeAll()

@@ -73,6 +73,8 @@
       "Population": "السكان",
       "Situation actuelle": "الوضع الحالي",
       "Besoins": "الاحتياجات",
+      "lat":"خط العرض",
+      "lng":"خط الطول",
       "BesoinsPlaceholder": "طعام، ملابس، أدوية، إلخ.",
       "Route": {
           "Route praticable": "الطريق قابل للسفر",
