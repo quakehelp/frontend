@@ -94,9 +94,9 @@ function Map({ className, zoom = 8 }: Props) {
 
                                 url: `/marker/${location.pinStatus}.svg`,
 
-                                anchor:new window.google.maps.Point(17, 46),
+                                // anchor:new google?.maps?.Point(17, 46),
 
-                                scaledSize:new window.google.maps.Size(50, 50)
+                                // scaledSize:new google?.maps?.Size(50, 50)
 
                             }}
                            onClick={() => {
