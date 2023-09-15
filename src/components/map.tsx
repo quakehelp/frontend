@@ -25,7 +25,6 @@ function Map({ className, zoom = 8 }: Props) {
     const user = useUser(state => state.user)
     const navigate = useNavigate()
     const search = useLocation()
-    const i18n=useTranslation().i18n
     return (
         <LoadScript
             googleMapsApiKey={import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY as string}
@@ -33,7 +32,7 @@ function Map({ className, zoom = 8 }: Props) {
             onError={onError}
             onUnmount={onUnmount}
             region='MA'
-            language={i18n.language}
+            //language={i18n.language}
 
         >
             <GoogleMap
@@ -85,7 +84,7 @@ function Map({ className, zoom = 8 }: Props) {
                 }}
 
             >
-                {loading || locations?.map((location, i) => {
+                {!loading && locations?.map((location, i) => {
 
                     return  <Marker
                             key={i}

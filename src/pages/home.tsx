@@ -67,7 +67,7 @@ function Home() {
         <NavBar />
 
         <Map  zoom={8} className="w-screen h-screen" />
-        <div className="absolute bottom-[100px] right-3">
+        <div className="absolute bottom-[140px] md:bottom-[100px]  right-3">
             <span onClick={getUserLocation} className="btn bg-white btn-circle shadow-xl">
                 <BiCurrentLocation className="text-xl"/>
             </span>

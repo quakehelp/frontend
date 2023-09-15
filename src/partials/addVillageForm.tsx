@@ -54,9 +54,17 @@ const AddVillageForm = ({
 
 
 
-            position: (value) => {
-                if (!value) return t("AddVillage.requis")
-            },
+            position:{
+                lat:(value)=>{
+                    if(!value) return t("AddVillage.requis")
+                    if(value>100 || value<-100) return true
+                },
+                lng:(value)=>{
+                    if(!value) return t("AddVillage.requis")
+                    if(value>100 || value<-100) return true
+                }
+            
+            }
     }
 
     })
@@ -173,14 +181,14 @@ const AddVillageForm = ({
 
             />
             <div dir={'ltr'} className="grid grid-cols-1 gap-1">
-        <NumberInput  label={t("AddVillage.lat")}
-                    removeTrailingZeros
-                    precision={10}
+        <TextInput  label={t("AddVillage.lat")}
+                   
+                    
+               
                     type="number"
                     {...form.getInputProps('position.lat')} />
-                            <NumberInput label={t("AddVillage.lng")}
-                    removeTrailingZeros
-                    precision={10}
+                            <TextInput label={t("AddVillage.lng")}
+               
                     type="number"
                     {...form.getInputProps('position.lng')} />
             </div>

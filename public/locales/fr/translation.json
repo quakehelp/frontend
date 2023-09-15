@@ -60,6 +60,11 @@
 
         }
     },
+    "banner":{
+        "text":"Nous avons besoin de bénévoles! Pour nous aider à entrer les données pour renforcer notre impact. Rejoignez l’équipe maintenant! WhatsApp: ",
+        "link":"Rejoindre",
+        "title":"Informations"
+     },
     "user": {
         "name": "Nom",
         "phoneNumber": "Numéro tél",
