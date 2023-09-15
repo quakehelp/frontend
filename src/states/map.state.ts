@@ -68,8 +68,8 @@ const useMapStore = create<MapState>((set, get) => ({
     loading: true,
     locations: undefined,
     center: {
-        lat: 31.7943,
-        lng: -7.0849
+        lat: 31.0924757,
+        lng: -8.3824504
     },
     activeLocation: undefined,
     filter: undefined,

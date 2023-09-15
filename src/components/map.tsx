@@ -13,10 +13,7 @@ import useUser from '../states/user.state';
 
 
 type Props = {
-    center: {
-        lat: number,
-        lng: number
-    }
+
     className?: string,
     zoom?: number
 
@@ -98,9 +95,9 @@ function Map({ className, zoom = 8 }: Props) {
 
                                 url: `/marker/${location.pinStatus}.svg`,
 
-                                anchor: new google.maps.Point(17, 46),
+                                anchor:new window.google.maps.Point(17, 46),
 
-                                scaledSize: new google.maps.Size(50, 50)
+                                scaledSize:new window.google.maps.Size(50, 50)
 
                             }}
                            onClick={() => {

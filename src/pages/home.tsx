@@ -19,13 +19,8 @@ function Home() {
             getData()
         }
     }, [locations])
-    const center = {
-        lat: 31.0350759,
-        lng: -8.4124458
-    };
-    useEffect(() => {
-        getUserLocation()
-    }, []);
+
+
 
     useEffect(() => {
         if (search && !admin) {
@@ -71,7 +66,7 @@ function Home() {
 
         <NavBar />
 
-        <Map center={center} zoom={10} className="w-screen h-screen" />
+        <Map  zoom={8} className="w-screen h-screen" />
         <div className="absolute bottom-[100px] right-3">
             <span onClick={getUserLocation} className="btn bg-white btn-circle shadow-xl">
                 <BiCurrentLocation className="text-xl"/>
