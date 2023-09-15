@@ -9,11 +9,12 @@ import BottomLocationDetail from "../partials/bottomLocationDetail";
 import { BiCurrentLocation } from "react-icons/bi";
 import { modals } from "@mantine/modals";
 import useUser from "../states/user.state";
+import Div100vh from "react-div-100vh";
 
 function Home() {
-    const { locations, getData,setCenter } = useMapStore()
-    const {setAdmin,admin}=useUser(state=>state)
-    const search=useLocation().search
+    const { locations, getData, setCenter } = useMapStore()
+    const { setAdmin, admin } = useUser(state => state)
+    const search = useLocation().search
     useEffect(() => {
         if (!locations) {
             getData()
@@ -28,22 +29,22 @@ function Home() {
             const params = new URLSearchParams(search)
             const admin = params.get('invitation')
             console.log('admin', admin)
-            if(admin && admin==="admin"){
+            if (admin && admin === "admin") {
                 modals.openConfirmModal({
-                    title:"Confirmation",
-                    children:"Voulez-vous accepter l'invitation de l'administrateur ?",
-                    labels:{
-                        confirm:"Accepter",
-                        cancel:"Refuser"
+                    title: "Confirmation",
+                    children: "Voulez-vous accepter l'invitation de l'administrateur ?",
+                    labels: {
+                        confirm: "Accepter",
+                        cancel: "Refuser"
                     },
-                    onConfirm:()=>{
+                    onConfirm: () => {
                         setAdmin(true)
 
                     }
 
                 });
             }
-            
+
         }
     }, [search]);
     const getUserLocation = () => {
@@ -60,23 +61,24 @@ function Home() {
         } else {
             alert("Geolocation is not supported by this browser.");
         }
-      }
-    return <div className="relative overflow-hidden w-screen h-screen">
+    }
+    return <Div100vh className="relative overflow-hidden">
 
 
-        <NavBar />
+            <NavBar />
 
-        <Map  zoom={8} className="w-screen h-screen" />
-        <div className="absolute bottom-[140px] md:bottom-[100px]  right-3">
-            <span onClick={getUserLocation} className="btn bg-white btn-circle shadow-xl">
-                <BiCurrentLocation className="text-xl"/>
-            </span>
-        </div>
-        <LoadingMap />
-       
-      <Outlet/>
-      <BottomLocationDetail/>
-    </div>
+            <Map zoom={8} className="w-screen h-screen" />
+            <div className="absolute bottom-[100px]  right-3">
+                <span onClick={getUserLocation} className="btn bg-white btn-circle shadow-xl">
+                    <BiCurrentLocation className="text-xl" />
+                </span>
+            </div>
+            <LoadingMap />
+
+            <Outlet />
+            <BottomLocationDetail />
+    
+    </Div100vh>
 }
 
 export default Home;

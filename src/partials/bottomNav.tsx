@@ -4,7 +4,7 @@ import useMapStore from "../states/map.state"
 
 const BottomNav = () => {
     const {setFilter,locations}=useMapStore()
-    return <div className="absolute bottom-20 md:bottom-0 left-[50%] w-full p-4 max-w-[500px] mx-auto -translate-x-[50%]">
+    return <div className="absolute bottom-0 left-[50%] w-full p-4 max-w-[500px] mx-auto -translate-x-[50%]">
         <div className="flex flex-row gap-4 items-center justify-center ">
       
            <img onClick={()=>{
