@@ -104,7 +104,7 @@ const AddVillageForm = ({
                 {...form.getInputProps('assoName')} />
             <div className="grid grid-cols-2 gap-4">
                 <TextInput label={t("AddVillage.Téléphone")}
-                    placeholder={t("AddVillage.TéléphonePlaceholder")}
+                    placeholder={t("AddVillage.tel placeholder")}
                     {...form.getInputProps('phoneNumber')} />
                 <NumberInput label={t("AddVillage.Population")}
                     min={1} max={1000000} step={1}

@@ -92,6 +92,7 @@
             "Route dangereuse":"Route dangereuse"
 
         },
+        "tel placeholder":"Veuillez saisir un numéro de téléphone d'association valide.",
         "Situation routière":"Situation routière",
         "Informations":"Informations",
         "InfoDetails":"Cliquer sur la carte pour ajouter un village ou modifier un village existant en cliquant dessus."
