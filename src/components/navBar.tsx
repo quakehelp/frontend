@@ -103,7 +103,7 @@ function NavBar() {
         setOpenBanner(false)
       }} dir={i18n.language === "ar" ? "rtl" : "ltr"} withCloseButton className="m-3 md:max-w-[400px] shadow-lg flex flex-col gap-2" icon={<AiOutlineInfoCircle size="1rem" />} title={t("banner.title")} color="red">
         <div className="flex flex-col gap-1">
-          <span>{t("banner.text")} <a href="https://wa.link/57uxh2" target="_blank" className="text-blue-600">{t("banner.link")}</a></span>
+          <span>{t("banner.text")} <a href="https://wa.me/212661822590" target="_blank" className="text-blue-600">{t("banner.link")}</a></span>
 
         </div>
 
